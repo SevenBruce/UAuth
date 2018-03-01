@@ -39,7 +39,23 @@ int main()
 
 	//authentication and key establishment phase
 	aUser.setSidj(aSensor.getSidj());
+	cout << "ECn:" << sizeof(ECn) << endl;
+	cout << "int:" << sizeof(int) << endl;
+	cout << "char:" << sizeof(char) << endl;
+	cout << "g:" << sizeof(g) << endl;
+	cout << "Big:" << sizeof(Big) << endl;
+	cout << "big:" << sizeof(big) << endl;
+	cout << "a:" << sizeof(a) << endl; 
+	cout << "&a:" << sizeof(&a) << endl;
+	cout << "epoint:" << sizeof(epoint) << endl;
 
+	ECn temKey = g;
+	Big k1 = rand(160,2);
+	temKey *= k1;
+	Big key;
+	temKey.get(key);
+	cout << "ECn:" << sizeof(temKey) << endl;
+	cout << "Big:" << sizeof(key) << endl;
 	int round = 7;
 	int times = 1;
 
@@ -56,8 +72,7 @@ int main()
 		}
 		clock_t clock2 = clock();
 		cout << "different:: " << diffclock(clock1, clock2) << endl;
-	}	
-
+	}
 
 	system("PAUSE");
 	return 0;

@@ -4,7 +4,7 @@
 #pragma region Gateway
 Gateway::Gateway(ECn g)
 {
-	Gateway::xgwn = randomString(RANDOM_STRING_LENGTH);
+	Gateway::xgwn = randomString(RANDOM_NUMBER_LENGTH);
 	Gateway::g = g;
 }
 
@@ -12,7 +12,7 @@ BackUser Gateway::getRegUser(RegUser regUser)
 {
 
 	string fi = xor ( hashSha256(regUser.getIdi() + Gateway::xgwn) ,  regUser.getMpi() );
-	string ki = randomString(RANDOM_STRING_LENGTH);
+	string ki = randomString(RANDOM_NUMBER_LENGTH);
 	string li = xor ( hashSha256(ki + Gateway::xgwn) , regUser.getMpi());
 
 	BackUser backUser(fi, li, ki, Gateway::g);
@@ -74,7 +74,7 @@ Message4 Gateway::getM3(Message3 m3) {
 		system("pause");
 	}
 
-	string k3 = randomString(RANDOM_STRING_LENGTH);
+	string k3 = randomString(RANDOM_NUMBER_LENGTH);
 	string einew = hashSha256(k3 + Gateway::xgwn);
 	string m7m7 = hashSha256(einew + k3 + Gateway::di + std::to_string(Gateway::timeStamp1) + m3.getM4());
 	string m6m6 = xor ((einew + k3 + m7m7), Gateway::ei);

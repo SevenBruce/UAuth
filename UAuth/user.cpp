@@ -3,9 +3,9 @@
 #pragma region User
 User::User()
 {
-	User::idi = randomString(RANDOM_STRING_LENGTH);
+	User::idi = randomString(RANDOM_STRING_LENGTH);	
 	User::pwi = randomString(RANDOM_STRING_LENGTH);
-	User::ri = randomString(RANDOM_STRING_LENGTH);
+	User::ri = randomString(RANDOM_NUMBER_LENGTH);
 
 	User::mpi = (hashSha256(User::ri + User::idi + User::pwi));
 }
@@ -31,29 +31,11 @@ void User::setSidj(string sidj)
 	User::sidj = sidj;
 }
 
-Message1 User::generateM1()
-{
-	User::di = xor (User::fi, User::mpi);
-	User::ei = xor (User::li, User::mpi);
-
-	User::k1 = rand(160, 2);
-	//cout << "k1:" << k1 << endl;
-	User::A = User::g;
-	User::A *= User::k1;
-
-	User::timeStamp = time(NULL);
-	string m2m2 = hashSha256(ecn2String(User::A) + User::idi + User::sidj + User::di + std::to_string(User::timeStamp));
-	string m1m1 = xor ((User::idi + User::sidj + m2m2), ei);
-
-	Message1 message1(User::A, User::ki, m1m1, User::timeStamp);
-	return message1;
-}
-
 void User::getM4(Message4 m4) {
 	string temStr = xor (m4.getM6(), User::ei);
 	string einew = temStr.substr(0, HASH_MESSAGE_LENGH);
-	string k3 = temStr.substr(HASH_MESSAGE_LENGH, RANDOM_STRING_LENGTH);
-	string m7Tem = temStr.substr(HASH_MESSAGE_LENGH + RANDOM_STRING_LENGTH);
+	string k3 = temStr.substr(HASH_MESSAGE_LENGH, RANDOM_NUMBER_LENGTH);
+	string m7Tem = temStr.substr(HASH_MESSAGE_LENGH + RANDOM_NUMBER_LENGTH);
 
 	ECn temKey = m4.getB();
 	temKey *= User::k1;

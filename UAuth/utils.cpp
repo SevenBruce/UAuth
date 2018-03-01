@@ -1,11 +1,22 @@
 #include "utils.h"
 
+string big2String(Big big)
+{
+	string result;
+	char aString[200];
+	aString << big;
+	result += aString;
+
+	return result;
+}
+
 string randomString(int len)
 {
 	string str = "";
 	int i;
+	srand((int)time(0));
 	for (i = 0; i<len; ++i)
-		str += 'a' + rand() % 26;
+		str += '0' + rand();
 	return str;
 }
 
@@ -28,15 +39,7 @@ string ecn2String(ECn ecn)
 	return result;
 }
 
-string big2String(Big big)
-{
-	string result;
-	char aString[100];
-	aString << big;
-	result += aString;
 
-	return result;
-}
 
 string hashSha256(string org)
 {
