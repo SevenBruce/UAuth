@@ -12,11 +12,10 @@ string Sensor::getSidj()
 
 RegSensor Sensor::generateRegSensor()
 {
-	string rj = randomString(RANDOM_STRING_LENGTH);
-	string mnj = xor (rj,Sensor::xgwn_sj);
+	string rj = randomString(RANDOM_NUMBER_LENGTH);
+	string mnj = xor (rj, Sensor::xgwn_sj);
 	int t1 = time(NULL);
 	string mpj = hashSha256(Sensor::xgwn_sj + rj + Sensor::sidj + to_string(t1));
-
 	RegSensor regSensor(Sensor::sidj,mnj,mpj,t1);
 	return regSensor;
 }

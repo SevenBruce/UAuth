@@ -5,7 +5,9 @@
 #include "messages.h"
 #include <string>
 #include<iostream>
+#include <vector>
 using namespace std;
+typedef std::vector<string> identiy_vector;
 
 #include "ECn.h"
 #include "Big.h"
@@ -21,6 +23,8 @@ public:
 	BackUser getRegUser(RegUser regUser);
 	BackSensor getRegSensor(RegSensor regSensor);
 	Message3 getM2(Message2 m2);
+	bool Gateway::isInIdentieis(string idenity);
+	void clearIdentities();
 
 private:
 	string xgwn;
@@ -28,6 +32,7 @@ private:
 	string sidj;
 
 	ECn g;
+	identiy_vector identities;
 	ECn publicKey;
 	Big privateKey;
 };

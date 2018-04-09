@@ -17,8 +17,24 @@ ECn Gateway::getG()
 	return Gateway::g;
 }
 
+bool Gateway::isInIdentieis(string idenity) {
+	vector<string>::iterator ret;
+
+	ret = std::find(identities.begin(), identities.end(), idenity);
+	if (ret == identities.end()) {
+		return false;
+	}
+	return true;
+}
+
 BackUser Gateway::getRegUser(RegUser regUser)
 {
+	if (isInIdentieis(regUser.getIdi())) {
+		cout << "this identity already exists" << endl;
+		system("pause");
+	}
+	identities.push_back(regUser.getIdi());
+
 	string di = (hashSha256(regUser.getIdi() + Gateway::xgwn));
 	string fi = xor (di, regUser.getMpi());
 	
@@ -35,10 +51,15 @@ BackSensor Gateway::getRegSensor(RegSensor regSensor)
 	string xgwn_sj = getIdPassword(regSensor.getSidj());
 	timeDeal(regSensor.getT1(),"Sensor reg T1: ");
 	string rj = xor (regSensor.getMnj(), xgwn_sj);
-	string temMPj = hashSha256(xgwn_sj+rj+ regSensor.getSidj()+ to_string(regSensor.getT1()));
-	if (temMPj != regSensor.getMpj()) {
-		cout << "reg sensor temMpj not equal" << endl;
-	}
+	string temMPj = hashSha256(xgwn_sj +rj+ regSensor.getSidj()+ to_string(regSensor.getT1()));
+
+	//if (temMPj != regSensor.getMpj()) {
+	//	cout << temMPj << endl;
+	//	cout << regSensor.getMpj() << endl;
+	//	cout << regSensor.getSidj() << endl;
+	//	cout << rj << endl;
+	//	cout << xgwn_sj << endl;
+	//}
 
 	string xj = (hashSha256(regSensor.getSidj() + Gateway::xgwn));
 	string ej = xor (xj, hashSha256(regSensor.getSidj() + xgwn_sj));
@@ -115,6 +136,10 @@ Message3 Gateway::getM2(Message2 m2)
 
 	//Message2 m2(Gateway::A, Gateway::m3, Gateway::timeStamp2);
 	//return m2;
+}
+
+void Gateway::clearIdentities() {
+	identities.clear();
 }
 
 //Message4 Gateway::getM3(Message3 m3) {

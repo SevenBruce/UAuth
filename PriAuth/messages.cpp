@@ -7,6 +7,12 @@ RegUser::RegUser()
 	RegUser::mpi = "";
 }
 
+RegUser::RegUser(string idi, string mpi)
+{
+	RegUser::idi = idi;
+	RegUser::mpi = mpi;
+}
+
 string RegUser::getIdi()
 {
 	return RegUser::idi;

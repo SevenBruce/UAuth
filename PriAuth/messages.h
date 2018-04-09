@@ -8,6 +8,7 @@ using namespace std;
 class RegUser {
 	public:
 		RegUser();
+		RegUser(string idi, string mpi);
 		~RegUser()
 		{
 

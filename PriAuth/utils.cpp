@@ -71,9 +71,8 @@ string xor (string org, string key)
 	{
 		tem = tem.append(key);
 	}
-
 	for (int temp = 0, i = 0; temp < org.size(); temp++, i++) {
-		encrypted += ((org[temp] - '0') ^ (tem[i] - '0')) + '0'; ;
+		encrypted += ((org[temp] - '0') ^ (tem[i] - '0')) + '0';
 	}
 	return encrypted;
 }
