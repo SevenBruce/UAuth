@@ -37,6 +37,10 @@ void RegUser::setHpwi(string mpi)
 
 #pragma region BackUser
 
+BackUser::BackUser()
+{
+}
+
 BackUser::BackUser(string ai, string b1, string b2, ECn g) {
 	BackUser::ai = ai;
 	BackUser::b1 = b1;
@@ -95,15 +99,23 @@ void RegSensor::setSidj(string sidj) {
 BackSensor::BackSensor()
 {
 }
-BackSensor::BackSensor(string cj)
+BackSensor::BackSensor(string b4, ECn g)
 {
-	BackSensor::b4 = cj;
+	BackSensor::b4 = b4;
+	BackSensor::g = g;
+
 }
 string BackSensor::getB4() {
 	return BackSensor::b4;
 }
 void BackSensor::setB4(string cj) {
 	BackSensor::b4 = cj;
+}
+ECn BackSensor::getG() {
+	return BackSensor::g;
+}
+void BackSensor::setG(ECn g) {
+	BackSensor::g = g;
 }
 #pragma endregion
 

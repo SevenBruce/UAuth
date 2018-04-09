@@ -9,6 +9,15 @@ string randomString(int len)
 	return str;
 }
 
+string big2String(Big big)
+{
+	string result;
+	char aString[100];
+	aString << big;
+	result += aString;
+
+	return result;
+}
 
 string ecn2String(ECn ecn)
 {
@@ -28,40 +37,30 @@ string ecn2String(ECn ecn)
 	return result;
 }
 
-string big2String(Big big)
-{
-	string result;
-	char aString[100];
-	aString << big;
-	result += aString;
 
-	return result;
-}
-
-void hashSha256(char org[],char test[])
-{
-	int i;
-	sha256 sh;
-	shs256_init(&sh);
-	for (i = 0; test[i] != 0; i++) shs256_process(&sh, test[i]);
-	shs256_hash(&sh, org);
-	//for (i = 0; i<32; i++) printf("%02x", (unsigned char)org[i]);
-	//printf("\n");
-}
-void hashSha256(string org, char * result)
-{
-	char hash[32];
-
-	int i;
-	sha256 sh;
-	shs256_init(&sh);
-	for (i = 0; org[i] != 0; i++) shs256_process(&sh, org[i]);
-	shs256_hash(&sh, result);
-
-	for (i = 0; i<32; i++) printf("%02x", (unsigned char)result[i]);
-	printf("\n");
-	
-}
+//void hashSha256(char org[],char test[])
+//{
+//	int i;
+//	sha256 sh;
+//	shs256_init(&sh);
+//	for (i = 0; test[i] != 0; i++) shs256_process(&sh, test[i]);
+//	shs256_hash(&sh, org);
+//}
+//
+//void hashSha256(string org, char * result)
+//{
+//	char hash[32];
+//
+//	int i;
+//	sha256 sh;
+//	shs256_init(&sh);
+//	for (i = 0; org[i] != 0; i++) shs256_process(&sh, org[i]);
+//	shs256_hash(&sh, result);
+//
+//	for (i = 0; i<32; i++) printf("%02x", (unsigned char)result[i]);
+//	printf("\n");
+//	
+//}
 
 string hashSha256(string org)
 {
@@ -85,12 +84,12 @@ void coutHash(string hash) {
 	for (int i = 0; i<end; i++) printf("%02x", (unsigned char)hash[i]);
 	printf("\n");
 }
-
-void coutHash(char* hash) {
-	int end = sizeof(hash);
-	for (int i = 0; i<16; i++) printf("%02x", (unsigned char)hash[i]);
-	printf("\n");
-}
+//
+//void coutHash(char* hash) {
+//	int end = sizeof(hash);
+//	for (int i = 0; i<16; i++) printf("%02x", (unsigned char)hash[i]);
+//	printf("\n");
+//}
 
 
 string xor (string org, string key)

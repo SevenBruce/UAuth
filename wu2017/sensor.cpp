@@ -1,11 +1,11 @@
 #include "sensor.h"
 
 #pragma region Sensor
-Sensor::Sensor(ECn g)
+Sensor::Sensor()
 {
 	Sensor::sidj = randomString(RANDOM_STRING_LENGTH);
-	Sensor::g = g;
 }
+
 string Sensor::getSidj()
 {
 	return Sensor::sidj;
@@ -20,6 +20,7 @@ RegSensor Sensor::generateRegSensor()
 void Sensor::getBackSensor(BackSensor backSensor)
 {
 	Sensor::b4 = backSensor.getB4();
+	Sensor::g = backSensor.getG();
 }
 
 void Sensor::sensorCheckIdentity(string sidj){

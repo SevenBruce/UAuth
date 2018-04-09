@@ -16,7 +16,7 @@ using namespace std;
 #pragma region Sensor
 class Sensor {
 public:
-	Sensor(ECn g);
+	Sensor();
 	~Sensor() {
 	}
 	RegSensor generateRegSensor();

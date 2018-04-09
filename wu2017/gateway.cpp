@@ -9,14 +9,24 @@ Gateway::Gateway(ECn g)
 	Gateway::g = g;
 }
 
-ECn Gateway::getG()
-{
-	return Gateway::g;
-}
+bool Gateway::isInIdentieis(string idenity) {
+	vector<string>::iterator ret;
 
+	ret = std::find(identities.begin(), identities.end(), idenity);
+	if (ret == identities.end()) {
+		return false;
+	}
+	return true;
+}
 
 BackUser Gateway::getRegUser(RegUser regUser)
 {
+	if (isInIdentieis(regUser.getIdi())) {
+		cout << "this identity already exists" << endl;
+		system("pause");
+	}
+	identities.push_back(regUser.getIdi());
+
 	string ai = randomString(RANDOM_NUMBER_LENGTH);
 	string b1 = xor (hashSha256(regUser.getIdi() + Gateway::idgwn + Gateway::x), hashSha256(regUser.getIdi() + regUser.getHpwi() + ai));
 	string b2 = xor (hashSha256(Gateway::idgwn + Gateway::x + ai), regUser.getHpwi());
@@ -28,8 +38,9 @@ BackUser Gateway::getRegUser(RegUser regUser)
 
 BackSensor Gateway::getRegSensor(RegSensor regSensor)
 {
-	string b4 = (hashSha256(regSensor.getSidj() + Gateway::idgwn + Gateway::x));
-	BackSensor backSensor(b4);
+	string b4 = hashSha256(regSensor.getSidj() + Gateway::idgwn + Gateway::x);
+	//string b4 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	BackSensor backSensor(b4, Gateway::g);
 	return backSensor;
 }
 
@@ -73,5 +84,9 @@ Message4 Gateway::getM3(Message3 m3) {
 
 	Message4 m4(m3.getC8(), m3.getC10(), c12, c13, d14);
 	return m4;
+}
+
+void Gateway::clearIdentities() {
+	identities.clear();
 }
 #pragma endregion

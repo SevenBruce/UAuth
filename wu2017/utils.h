@@ -13,7 +13,6 @@ using namespace std;
 void coutHash(string);
 
 string randomString(int);
-Big randomBig();
 
 string ecn2String(ECn ecn);
 string big2String(Big big);

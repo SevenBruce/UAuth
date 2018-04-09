@@ -67,13 +67,16 @@ private:
 class BackSensor {
 public:
 	BackSensor();
-	BackSensor(string b4);
+	BackSensor(string b4,ECn g);
 	~BackSensor(){}
 	string getB4();
 	void setB4(string b4);
+	ECn getG();
+	void setG(ECn g);
 
 private:
 	string b4;
+	ECn g;
 };
 
 class Message1 {
