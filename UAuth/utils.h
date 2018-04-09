@@ -3,11 +3,15 @@
 
 #include <string>
 #include<iostream>
+#include <cmath>
+#include <random>
 using namespace std;
+
 
 #include "big.h"
 #include "mirdef.h"
 #include "ecn.h"
+#include "publicPara.h"
 #include <ctime>
 
 void coutHash(string);

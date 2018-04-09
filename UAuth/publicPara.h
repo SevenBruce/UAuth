@@ -1,10 +1,12 @@
 #ifndef PUBLICPARA_H
 #define PUBLICPARA_H
 
+
+
 /* the length of a random string */
 static int RANDOM_STRING_LENGTH = 8;
 
-/* the length of a random number */
+/* the length of a random string */
 static int RANDOM_NUMBER_LENGTH = 20;
 
 /* the length of a hash 256 string */

@@ -8,8 +8,25 @@ Gateway::Gateway(ECn g)
 	Gateway::g = g;
 }
 
+bool Gateway::isInIdentieis(string idenity) {
+	vector<string>::iterator ret;
+
+	ret = std::find(identities.begin(), identities.end(), idenity);
+	if (ret == identities.end()) {
+		return false;
+	}
+	return true;
+}
+
 BackUser Gateway::getRegUser(RegUser regUser)
 {
+	//cout << isInIdentieis(regUser.getIdi()) << endl;
+	//cout << regUser.getIdi() << endl;
+	if (isInIdentieis(regUser.getIdi())) {
+		cout << "this identity already exists" << endl;
+		system("pause");
+	}
+	identities.push_back(regUser.getIdi());
 
 	string fi = xor ( hashSha256(regUser.getIdi() + Gateway::xgwn) ,  regUser.getMpi() );
 	string ki = randomString(RANDOM_NUMBER_LENGTH);
@@ -22,8 +39,8 @@ BackUser Gateway::getRegUser(RegUser regUser)
 
 BackSensor Gateway::getRegSensor(RegSensor regSensor)
 {
-	string xj = (hashSha256(regSensor.getSidj() + Gateway::xgwn));
-
+	string xj = hashSha256(regSensor.getSidj() + Gateway::xgwn);
+	//string xj = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 	BackSensor backSensor(xj, Gateway::g);
 	return backSensor;
 }
@@ -81,5 +98,9 @@ Message4 Gateway::getM3(Message3 m3) {
 
 	Message4 m4(m3.getB(), m6m6);
 	return m4;
+}
+
+void Gateway::clearIdentities() {
+	identities.clear();
 }
 #pragma endregion

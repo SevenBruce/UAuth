@@ -1,5 +1,14 @@
 #include "utils.h"
 
+string randomString(int len)
+{
+	string str = "";
+	int i;
+	for (i = 0; i<len; ++i)
+		str += 'a' + rand() % 26;
+	return str;
+}
+
 string big2String(Big big)
 {
 	string result;
@@ -9,17 +18,6 @@ string big2String(Big big)
 
 	return result;
 }
-
-string randomString(int len)
-{
-	string str = "";
-	int i;
-	srand((int)time(0));
-	for (i = 0; i<len; ++i)
-		str += '0' + rand();
-	return str;
-}
-
 
 string ecn2String(ECn ecn)
 {
