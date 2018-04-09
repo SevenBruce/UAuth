@@ -44,6 +44,10 @@ void RegUser::setMii(string mii) {
 
 #pragma region BackUser
 
+BackUser::BackUser()
+{
+}
+
 BackUser::BackUser(string ei, string fi, ECn g) {
 	BackUser::ei = ei;
 	BackUser::fi = fi;

@@ -2,7 +2,7 @@
 #define PUBLICPARA_H
 
 /* the length of a random string */
-static int RANDOM_STRING_LENGTH = 12;
+static int RANDOM_STRING_LENGTH = 8;
 
 /* the length of a random number */
 static int RANDOM_NUMBER_LENGTH = 20;

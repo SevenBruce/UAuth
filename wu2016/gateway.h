@@ -27,8 +27,10 @@ public:
 	BackUser getRegUser(RegUser regUser);
 	BackSensor getRegSensor(RegSensor regSensor);
 	bool Gateway::isInIdentieis(string idenity);
+	void clearIdentities();
+
 	Message2 getM1(Message1 m1);
-	Message4 getM3(Message3 m3);
+	Message4 getM3(Message3 m3);	
 
 private:
 	string x;
@@ -43,10 +45,7 @@ private:
 
 	string m3;
 
-
-
 	ECn g;
-	ECn A;
 	identiy_vector identities;
 	int timeStamp2;
 	int timeStamp1;

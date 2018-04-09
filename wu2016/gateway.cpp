@@ -41,7 +41,8 @@ BackUser Gateway::getRegUser(RegUser regUser)
 
 BackSensor Gateway::getRegSensor(RegSensor regSensor)
 {
-	string cj = (hashSha256(regSensor.getSidj() + Gateway::x));
+	string cj = hashSha256(regSensor.getSidj() + Gateway::x);
+	string cj = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 	BackSensor backSensor(cj, Gateway::g);
 	return backSensor;
 }
@@ -56,10 +57,9 @@ Message2 Gateway::getM1(Message1 m1)
 
 	Gateway::idi = xor (m1.getB4(), hashSha256(Gateway::r3 + Gateway::miiNew + ecn2String(m1.getB2())));
 	if (!isInIdentieis(Gateway::idi)) {
-		//cout << "this user not registered" << endl;
-		//cout << "user identity : " << endl;
-		//cout << Gateway::idi << endl;
-		//cout << "all identity : " << endl;
+		/*cout << "this user not registered" << endl;
+		cout << "user identity : " << Gateway::idi << endl;
+		cout << "all identity : " << endl;*/
 		for (std::vector<string>::iterator m = identities.begin(); m != identities.end(); m++)    //用迭代器的方式输出容器对象的值
 		{
 			cout << *m << endl;
@@ -94,5 +94,9 @@ Message4 Gateway::getM3(Message3 m3) {
 
 	Message4 m4(m3.getC1(), m3.getC3(), d2, d3, d4);
 	return m4;
+}
+
+void Gateway::clearIdentities() {
+	identities.clear();
 }
 #pragma endregion

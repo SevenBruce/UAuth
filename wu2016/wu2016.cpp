@@ -1,5 +1,10 @@
 #include "wu2016.h"
 
+User arrayUser[1000];
+Sensor arraySensor[1000];
+int times[5] = { 100, 250 , 500 , 750 , 1000 };
+void sensorRegistrationTime(Gateway gateWay);
+void userRegistrationTime(Gateway gateWay);
 int main()
 {
 	time_t seed;
@@ -38,32 +43,86 @@ int main()
 	//authentication and key establishment phase
 	aUser.setSidj(aSensor.getSidj());
 
-	int round = 7;
-	int times = 1;
-
-	for (int j = 1; j <= round; j++) {
-		times = 100 * j;
-		cout << "the time of running wu2016 " << times << " times is :: " << endl;
-		clock_t clock1 = clock();
-		for (int i = 0; i < times; i++) {
-			Message1 m1 = aUser.generateM1();
-			Message2 m2 = gateWay.getM1(m1);
-			Message3 m3 = aSensor.getM2(m2);
-			Message4 m4 = gateWay.getM3(m3);
-			aUser.getM4(m4);
+	int count = 10;
+	clock_t clock1, clock2;
+	double sum = 0;
+	for (int j = 0; j < 5; j++) {
+		cout << "the time of running wu2016 " << times[j] << " times is :: " << endl;
+		for (int k = 0; k < count; k++) {
+			for (int i = 0; i < times[j]; i++) {
+				clock1 = clock();
+				Message1 m1 = aUser.generateM1();
+				Message2 m2 = gateWay.getM1(m1);
+				Message3 m3 = aSensor.getM2(m2);
+				Message4 m4 = gateWay.getM3(m3);
+				aUser.getM4(m4);
+				clock2 = clock();
+				sum = sum + diffclock(clock2, clock1);
+			}
 		}
-		clock_t clock2 = clock();
-		cout << "different:: " << diffclock(clock1, clock2)  << endl;
+		cout << "different:: " << sum / count << endl;
+		sum = 0;
 	}
+	gateWay.clearIdentities();
 
-	
-	
-	
+	userRegistrationTime(gateWay);
+	sensorRegistrationTime(gateWay);
+
 	system("PAUSE");
 	return 0;
-
 }
 
 
- 
+void userRegistrationTime(Gateway gateWay) {
+	clock_t clock1, clock2;
+	RegUser regUser;
+	BackUser backUser;
+	int count = 100;
+	double sum = 0;
+
+	for (int j = 0; j < 5; j++) {
+		cout << "User registration time of running wu2016 " << times[j] << " times is :: " << endl;
+		for (int k = 0; k < count; k++) {
+			for (int i = 0; i < times[j]; i++) {
+				clock1 = clock();
+				regUser = arrayUser[i].generateReg();
+				backUser = gateWay.getRegUser(regUser);
+				arrayUser[i].getBackUser(backUser);
+				clock2 = clock();
+				sum = sum + diffclock(clock2, clock1);
+			}
+			gateWay.clearIdentities();
+		}		
+		cout << "different:: " << sum / count << endl;
+		sum = 0;
+	}
+
+}
+
+void sensorRegistrationTime(Gateway gateWay) {
+	clock_t clock1, clock2;
+	RegSensor regSensor;
+	BackSensor backSensor;
+	int count = 100;
+	double sum = 0;
+
+	for (int j = 0; j < 5; j++) {
+		cout << "Sensor registration time of running wu2016 " << times[j] << " times is :: " << endl;
+		for (int k = 0; k < count; k++) {
+			for (int i = 0; i < times[j]; i++) {
+				clock1 = clock();
+				regSensor = arraySensor[i].generateRegSensor();
+				backSensor = gateWay.getRegSensor(regSensor);
+				arraySensor[i].getBackSensor(backSensor);
+				clock2 = clock();
+				sum = sum + diffclock(clock2, clock1);
+			}
+		}
+		cout << "different:: " << sum / count << endl;
+		sum = 0;
+	}
+}
+
+
+
 
